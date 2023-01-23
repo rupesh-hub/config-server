@@ -8,9 +8,6 @@ server:
 
 #SPRING CONFIGURATION
 spring:
-  application:
-    name: user-management
-
   #POSTGRES SQL CONFIGURATION
   datasource:
     driver-class-name: org.postgresql.Driver
