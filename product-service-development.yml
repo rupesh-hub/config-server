@@ -1,5 +1,8 @@
+#SERVER CONFIGURATION
 server:
   port: 8282
+  servlet:
+    context-path: /user-api/v1.0
 
 #MYBATIS PLUS CONFIGURATION
 mybatis-plus:
