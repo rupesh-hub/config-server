@@ -43,3 +43,7 @@ eureka:
       defaultZone: http://localhost:8761/eureka/
   instance:
     hostname: localhost
+    
+    
+USER-MANAGEMENT:
+  base-url: http://localhost:8181/user-api/v1.0
