@@ -2,8 +2,8 @@
 #SERVER CONFIGURATION
 server:
   port: 8181
-  servlet:
-    context-path: /user-api/v1.0
+#   servlet:
+#     context-path: /user-api/v1.0
 
 
 #SPRING CONFIGURATION
