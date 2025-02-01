@@ -24,18 +24,16 @@ spring:
         - id: review-service
           uri: lb://review-service
           predicates:
-            - Path=/review-service/**
+            - Path=/api/v1.0.0/**
           filters:
-            - RewritePath=/review-service/(?<segment>.*), /api/v1.0.0/$\{segment}
+            - StripPrefix=0
 
-
-# Eureka Configuration
+# Rest of your configuration remains the same
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
 
-# Management Endpoints Configuration
 management:
   endpoints:
     web:
@@ -47,7 +45,6 @@ management:
   info:
     enabled: true
 
-# Application Information
 info:
   app:
     name: gateway-service
