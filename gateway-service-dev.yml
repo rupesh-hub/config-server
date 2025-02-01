@@ -1,5 +1,5 @@
 server:
-  port: 8082
+  port: 8080
 
 spring:
   cloud:
@@ -22,7 +22,7 @@ spring:
 
         # Review Service Route
         - id: review-service
-          uri: http://review-service:8686
+          uri: http://localhost:8686
           predicates:
             - Path=/review-service/**
           filters:
