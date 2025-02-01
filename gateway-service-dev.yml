@@ -11,24 +11,8 @@ spring:
         locator:
           enabled: true
           lowerCaseServiceId: true
-      routes:
-        # Authorization Server Route
-        - id: authorization-server
-          uri: http://authorization-server:9191
-          predicates:
-            - Path=/auth/**
-          filters:
-            - RewritePath=/auth/(?<path>.*), /$\{path}
 
-        # Review Service Route
-        - id: review-service
-          uri: lb://review-service
-          predicates:
-            - Path=/api/v1.0.0/**
-          filters:
-            - StripPrefix=0
-
-# Rest of your configuration remains the same
+# Rest of config remains same
 eureka:
   client:
     service-url:
