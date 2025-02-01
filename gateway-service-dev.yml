@@ -24,7 +24,7 @@ spring:
       routes:
 
         # authorization server
-        - id: authorization-service
+        - id: authorization-server
           uri: http://localhost:9191
           predicates:
             - Path=/auth/**
