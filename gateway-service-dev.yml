@@ -22,9 +22,12 @@ spring:
 
         # Review Service Route
         - id: review-service
-          uri: http://localhost:8686
+          uri: lb://review-service
           predicates:
             - Path=/review-service/**
+          filters:
+            - RewritePath=/review-service/(?<segment>.*), /api/v1.0.0/$\{segment}
+
 
 # Eureka Configuration
 eureka:
