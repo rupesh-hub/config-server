@@ -4,12 +4,25 @@ server:
 #EUREKA/DISCOVERY-SERVER CONFIGURATION
 eureka:
   client:
-    register-with-eureka: true
-    fetch-registry: true
     service-url:
       defaultZone: http://localhost:8761/eureka/
-  instance:
-    hostname: localhost
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  info:
+    enabled: true
+  endpoint:
+    gateway:
+      enabled: true
+
+info:
+  app:
+    name: gateway-service
+  version: 1.0.0
+  description: This service acts as a gateway for the microservices application.
 
 #CLOUD GATEWAY CONFIGURATION
 spring:
@@ -21,16 +34,18 @@ spring:
       discovery:
         locator:
           enabled: true
-      routes:
 
+      routes:
         # authorization server
         - id: authorization-server
-          uri: http://localhost:9191
+          uri: http://authorization-server:9191
           predicates:
             - Path=/auth/**
           filters:
             - RewritePath=/auth/(?<path>.*), /$\{path}
-
+          # review-service
+        - id: review-service
+# review-service : 8686
   application:
     gateway:
       discovery:
