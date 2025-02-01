@@ -5,6 +5,7 @@ server:
     include-binding-errors: always
     include-stacktrace: never
 
+spring:
   # Database Configuration
   datasource:
     url: jdbc:postgresql://localhost:5432/authorization_db
