@@ -1,0 +1,105 @@
+server:
+  port: 9191
+  error:
+    include-message: always
+    include-binding-errors: always
+    include-stacktrace: never
+
+  # Database Configuration
+  datasource:
+    url: jdbc:postgresql://localhost:5432/authorization_db
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      idle-timeout: 30000
+      connection-timeout: 20000
+      max-lifetime: 1800000
+
+  # JPA and Hibernate Configuration
+  jpa:
+    show-sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        generate_statistics: true
+        jdbc:
+          time_zone: UTC
+
+  mail:
+    host: localhost
+    port: 1025
+    username: ''
+    password: ''
+
+    properties:
+      mail:
+        smtp:
+          auth: false
+          starttls:
+            enable: false
+        debug: true
+
+    default-encoding: UTF-8
+    test-connection: true
+
+# OpenAPI/Swagger Configuration
+springdoc:
+  api-docs:
+    enabled: true
+    path: /v3/api-docs
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+    operationsSorter: method
+  cache:
+    disabled: true
+
+# Actuator Configuration
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      show-details: always
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+
+# Custom Mail Properties
+app:
+  mail:
+    from-address: dulalrupesh77@gmail.com
+    support-address: dulalrupesh77@gmail.com
+
+    smtp:
+      debug: true
+      timeout: 5000
+      connection-timeout: 5000
+
+# Sample Email Template Configuration
+email:
+  templates:
+    welcome: classpath:templates/welcome-email.html
+    password-reset: classpath:templates/password-reset.html
+    verification: classpath:templates/account-verification.html
+
+#EUREKA/DISCOVERY-SERVER CONFIGURATION
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    hostname: localhost
