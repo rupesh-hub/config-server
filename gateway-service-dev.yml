@@ -1,9 +1,7 @@
 server:
-  port: 8080
+  port: 8082
 
 spring:
-  application:
-    name: gateway-service
   cloud:
     gateway:
       httpclient:
@@ -21,14 +19,14 @@ spring:
             - Path=/auth/**
           filters:
             - RewritePath=/auth/(?<path>.*), /$\{path}
-        
+
         # Review Service Route
         - id: review-service
           uri: http://review-service:8686
           predicates:
             - Path=/review-service/**
           filters:
-            - RewritePath=/review-service/(?<segment>.*), /api/v1.0.0/review-service/$\{segment}
+            - RewritePath=/review-service/(?<segment>.*), /api/v1.0.0/$\{segment}
 
 # Eureka Configuration
 eureka:
