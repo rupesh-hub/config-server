@@ -44,7 +44,6 @@ spring:
           filters:
             - RewritePath=/auth/(?<path>.*), /$\{path}
           # review-service
-        - id: review-service
 # review-service : 8686
   application:
     gateway:
