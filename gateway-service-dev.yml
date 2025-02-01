@@ -1,0 +1,39 @@
+server:
+  port: 8080
+
+#EUREKA/DISCOVERY-SERVER CONFIGURATION
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    hostname: localhost
+
+#CLOUD GATEWAY CONFIGURATION
+spring:
+  cloud:
+    gateway:
+      httpclient:
+        connect-timeout: 1000
+        response-timeout: 60s
+      discovery:
+        locator:
+          enabled: true
+      routes:
+
+        # authorization server
+        - id: authorization-service
+          uri: http://localhost:9191
+          predicates:
+            - Path=/auth/**
+          filters:
+            - RewritePath=/auth/(?<path>.*), /$\{path}
+
+  application:
+    gateway:
+      discovery:
+        locator:
+          lowerCaseServiceId: true
+          enabled: true
