@@ -1,31 +1,9 @@
 server:
   port: 8080
 
-#EUREKA/DISCOVERY-SERVER CONFIGURATION
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka/
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-  info:
-    enabled: true
-  endpoint:
-    gateway:
-      enabled: true
-
-info:
-  app:
-    name: gateway-service
-  version: 1.0.0
-  description: This service acts as a gateway for the microservices application.
-
-#CLOUD GATEWAY CONFIGURATION
 spring:
+  application:
+    name: gateway-service
   cloud:
     gateway:
       httpclient:
@@ -34,20 +12,45 @@ spring:
       discovery:
         locator:
           enabled: true
-
+          lowerCaseServiceId: true
       routes:
-        # authorization server
+        # Authorization Server Route
         - id: authorization-server
           uri: http://authorization-server:9191
           predicates:
             - Path=/auth/**
           filters:
             - RewritePath=/auth/(?<path>.*), /$\{path}
-          # review-service
-# review-service : 8686
-  application:
+        
+        # Review Service Route
+        - id: review-service
+          uri: http://review-service:8686
+          predicates:
+            - Path=/reviews/**
+          filters:
+            - RewritePath=/reviews/(?<path>.*), /$\{path}
+
+# Eureka Configuration
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+# Management Endpoints Configuration
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
     gateway:
-      discovery:
-        locator:
-          lowerCaseServiceId: true
-          enabled: true
+      enabled: true
+  info:
+    enabled: true
+
+# Application Information
+info:
+  app:
+    name: gateway-service
+  version: 1.0.0
+  description: This service acts as a gateway for the microservices application.
