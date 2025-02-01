@@ -26,9 +26,9 @@ spring:
         - id: review-service
           uri: http://review-service:8686
           predicates:
-            - Path=/reviews/**
+            - Path=/review-service/**
           filters:
-            - RewritePath=/reviews/(?<path>.*), /$\{path}
+            - RewritePath=/review-service/(?<segment>.*), /api/v1.0.0/review-service/$\{segment}
 
 # Eureka Configuration
 eureka:
