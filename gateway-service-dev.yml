@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8687
 
 spring:
   cloud:
@@ -25,8 +25,6 @@ spring:
           uri: http://localhost:8686
           predicates:
             - Path=/review-service/**
-          filters:
-            - RewritePath=/review-service/(?<segment>.*), /api/v1.0.0/$\{segment}
 
 # Eureka Configuration
 eureka:
