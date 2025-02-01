@@ -3,7 +3,6 @@ application:
     origins: http://localhost:4200,http://localhost:8080
 
 spring:
-
   data:
     mongodb:
       uri: mongodb://localhost:27017/chat_db
